@@ -12,11 +12,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+   bool isLoading ;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    bool isLoading;
+    isLoading =false;
   }
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               width: 200.0,
               margin: EdgeInsets.all(20.0),
-              child: RaisedButton.icon(
+              child: !isLoading? RaisedButton.icon(
                 
                 color: Colors.white,
                 icon: CircleAvatar(
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 label: Text("  Login with Google"),
                 onPressed: () => _logIn(context),
-              ),
+              ):CircularProgressIndicator(backgroundColor: Colors.white,),
               //RaisedButton(
               //   child: Text("Login"),
               //   onPressed: () => _logIn(context),
@@ -89,9 +90,10 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
-
-Future _logIn(BuildContext contexta) async {
+  Future _logIn(BuildContext contexta) async {
+  setState(() {
+    isLoading=true;
+  });
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   //print(_email.trim() +"-"+_password);
@@ -110,4 +112,8 @@ Future _logIn(BuildContext contexta) async {
     print(e.message);
     Scaffold.of(contexta).showSnackBar(SnackBar(content: Text(e.message)));
   }
+  
 }
+}
+
+
