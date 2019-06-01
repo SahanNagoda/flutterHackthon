@@ -21,7 +21,7 @@ class PostsPage extends StatefulWidget {
 class _PostsPageState extends State<PostsPage> {
   @override
   void initState() {
-    Firestore.instance.collection('posts').getDocuments().asStream().listen((data) {
+    Firestore.instance.collection('posts').orderBy('time').getDocuments().asStream().listen((data) {
       build(context);
     });
     super.initState();
@@ -53,7 +53,21 @@ class _PostsPageState extends State<PostsPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Row(
-                                      children: <Widget>[],
+                                      children: <Widget>[
+                                        CircleAvatar(
+                                          child: Image.network(posts[index]['userImage']),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          posts[index]['username'],
+                                          style: TextStyle(fontSize: 18),
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
                                     ),
                                     Text(
                                       posts[index]['title'],

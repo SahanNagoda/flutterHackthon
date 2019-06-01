@@ -64,13 +64,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2"
-  custom_multi_image_picker:
-    dependency: "direct main"
-    description:
-      name: custom_multi_image_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.24"
   datetime_picker_formfield:
     dependency: "direct main"
     description:

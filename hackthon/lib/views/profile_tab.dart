@@ -37,13 +37,13 @@ class _ProfileTabState extends State<ProfileTab> {
       children: <Widget>[
         Container(
             child: FutureBuilder(
-            future: _getCurrentUserName(),
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData)
-                return new Text(snapshot.data.toString());
-              else
-                return new Container();
-            },
+          future: _getCurrentUserName(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData)
+              return new Text(snapshot.data.toString());
+            else
+              return new Container();
+          },
         )),
         FlatButton(
           child: Text("Sign Out"),
