@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "907048256914",
+    "firebase_url": "https://flutterhackthon.firebaseio.com",
+    "project_id": "flutterhackthon",
+    "storage_bucket": "flutterhackthon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907048256914:android:9a5b9f056d7e70df",
+        "android_client_info": {
+          "package_name": "com.example.hackthon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907048256914-0daj0u05hsfhq0i4r4t7rgh1ifcbl4mt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKgtfg0Ncs-DouC9i39QHvPPqYX_fNaso"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907048256914-0daj0u05hsfhq0i4r4t7rgh1ifcbl4mt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
