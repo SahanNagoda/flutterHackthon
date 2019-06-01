@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackthon/utils/app_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfileTab extends StatefulWidget {
   final AppModel model;
@@ -13,10 +14,20 @@ class ProfileTab extends StatefulWidget {
 class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        'profile',
-      ),
+    return Column(
+      children: <Widget>[
+        Container(
+          child: Text(
+            'profile',
+          ),
+        ),
+        FlatButton(
+            child: Text("Sign Out"),
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+            },
+          )
+      ],
     );
   }
 }
