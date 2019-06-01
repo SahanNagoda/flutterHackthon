@@ -1,33 +1,100 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hackthon/utils/app_model.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:uuid/uuid.dart';
+
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostsPage extends StatefulWidget {
+  final AppModel model;
   @override
   _PostsPageState createState() => _PostsPageState();
+  PostsPage(this.model);
 }
 
 class _PostsPageState extends State<PostsPage> {
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: MaterialButton(
-        onPressed: _addPost,
-        child: Text('lol'),
-      ),
-    );
+  void initState() {
+    Firestore.instance.collection('posts').getDocuments().asStream().listen((data) {
+      build(context);
+    });
+    super.initState();
   }
 
-  _addPost() async {
-    await Firestore.instance.collection('posts').document('1').setData({'title': 'title', 'author': 'author'});
-
-    File imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
-    StorageReference ref = FirebaseStorage.instance.ref().child('someidhere').child("image.jpg");
-    StorageUploadTask uploadTask = ref.putFile(imageFile);
-    return await (await uploadTask.onComplete).ref.getDownloadURL();
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance.collection('posts').getDocuments().asStream(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData && snapshot.data.documents.isNotEmpty) {
+            List<dynamic> posts = snapshot.data.documents;
+            return ListView.builder(
+              itemCount: snapshot.data.documents.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[],
+                                    ),
+                                    Text(
+                                      posts[index]['title'],
+                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                                    ),
+                                    /* Text(
+                                      timeago.format(posts[index]['time']),
+                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+                                    ), */
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          Text(
+                            posts[index]['description'],
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          posts[index]['images'][0] != null
+                              ? Image.network(
+                                  posts[index]['images'][0],
+                                  width: MediaQuery.of(context).size.width,
+                                )
+                              : Container()
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          } else {
+            return Text('Loading...');
+          }
+        },
+      ),
+    );
   }
 }
