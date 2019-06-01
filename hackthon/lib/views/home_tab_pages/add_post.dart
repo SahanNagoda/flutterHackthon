@@ -8,8 +8,8 @@ class AddPostPage extends StatefulWidget {
 class _AddPostPageState extends State<AddPostPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Add post'),
+    return Scaffold(
+      body: Text('Add post'),
     );
   }
 }
