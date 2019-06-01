@@ -15,7 +15,7 @@ class _ProfileTabState extends State<ProfileTab> {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        'home',
+        'profile',
       ),
     );
   }
