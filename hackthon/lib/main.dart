@@ -18,7 +18,6 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-   
     return ScopedModel<AppModel>(
       model: model,
       child: MaterialApp(
@@ -41,25 +40,21 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             print("SplashScreen");
-            String route="/login";
+            String route = "/login";
             return LoginPage(model);
           } else {
-            
             if (snapshot.hasData) {
               print(snapshot.data);
-              String route="/login";
+              String route = "/login";
               return HomePage(model);
-              
             } else if (snapshot.hasError) {
               print(snapshot.error);
-              String route="/login";
+              String route = "/login";
               return LoginPage(model);
             }
-            String route="/login";
+            String route = "/login";
             return LoginPage(model);
           }
         });
   }
-
 }
-

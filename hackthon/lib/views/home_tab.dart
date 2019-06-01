@@ -24,8 +24,8 @@ class _HomeTabState extends State<HomeTab> {
         return Scaffold(
           body: Stack(
             children: <Widget>[
-              PostsPage(),
-              widget.model.homeTabState == POST_ADD ? AddPostPage() : Container(),
+              PostsPage(model),
+              widget.model.homeTabState == POST_ADD ? AddPostPage(model) : Container(),
             ],
           ),
           floatingActionButton: _getFab(),
