@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<Widget> pages;
-  int _index = 1;
+  int _index = 0;
 
   final PageStorageBucket bucket = PageStorageBucket();
 
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
       BottomNavigationBarItem(
         icon: Icon(
           Icons.home,
-          color: Colors.red,
+          color: Colors.blue,
         ),
         title: Text(
           'Home',
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
       BottomNavigationBarItem(
         icon: Icon(
           Icons.snooze,
-          color: Colors.amber,
+          color: Colors.blue,
         ),
         title: Text(
           'Message',
