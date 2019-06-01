@@ -15,7 +15,7 @@ class _NotificationTabState extends State<NotificationTab> {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        'home',
+        'notification',
       ),
     );
   }

@@ -46,20 +46,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-          appBar: AppBar(
-            title: Text('Home'),
-            centerTitle: true,
-          ),
-          body: PageStorage(bucket: bucket, child: pages[_index]),
-          bottomNavigationBar: BottomNavigationBar(
-            items: _getBottomNavBar(),
-            currentIndex: _index,
-            onTap: (index) {
-              setState(() {
-                _index = index;
-              });
-            },
-          )),
+        appBar: AppBar(
+          title: Text('Home'),
+          centerTitle: true,
+        ),
+        body: PageStorage(bucket: bucket, child: pages[_index]),
+        bottomNavigationBar: BottomNavigationBar(
+          items: _getBottomNavBar(),
+          currentIndex: _index,
+          onTap: (index) {
+            setState(() {
+              if (_index == 0 && index == 0) {
+                widget.model.setHomeTabState(1);
+              }
+              _index = index;
+            });
+          },
+        ),
+      ),
     );
   }
 
